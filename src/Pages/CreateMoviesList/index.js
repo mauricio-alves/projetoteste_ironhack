@@ -20,9 +20,10 @@ export function CreateMoviesList({ movies, setMovies }) {
   }
 
   function handleMovie(event) {
-    setAddMovie({ ...addMovie, event });
-    console.log(event);
-    console.log(addMovie);
+    // NOT WORKING
+    // setAddMovie({ ...addMovie, event });
+    // console.log(event);
+    // console.log(addMovie);
   }
 
   async function handleSubmit(event) {
