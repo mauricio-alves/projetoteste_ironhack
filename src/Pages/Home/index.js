@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+
 export function Home() {
   return (
-    <>
-      <h1>Filmes favoritos</h1>
-      <h2>Criar lista!</h2>
+    <div>
+      <Link to="/movies">
+        <button className="btn btn-primary">Crie sua lista!</button>
+      </Link>
       <div>
         <p>Listas criadas</p>
-        <button>Detalhes</button>
       </div>
-    </>
-  )
+    </div>
+  );
 }
