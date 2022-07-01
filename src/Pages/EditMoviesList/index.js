@@ -40,12 +40,11 @@ export function EditMoviesList({ movies, setMovies }) {
 
   function handleDelete(movie) {
     const clone = { ...form };
-
     const updatedList = clone.movies.filter((currentMovie) => {
       return movie !== currentMovie;
     });
     setForm({ ...form, movies: updatedList });
-    toast.error("Filme removido sua lista!");
+    toast.error("Filme removido da sua lista!");
   }
 
   async function handleSubmit(event) {
