@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { EditMoviesList } from "./Pages/EditMoviesList/index.js";
 import { NotFound } from "./Pages/NotFound/index.js";
+import { Footer } from "./components/Footer/index.js";
 
 export function App() {
   const [movies, setMovies] = useState([]);
@@ -59,6 +60,7 @@ export function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

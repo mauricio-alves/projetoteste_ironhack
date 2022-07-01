@@ -104,64 +104,83 @@ export function EditMoviesList({ movies, setMovies }) {
           Salvar lista
         </button>
       </form>
-
-      {form.movies.map((currentMovie) => {
-        return (
-          <div className="card" style={{ width: "18rem" }}>
-            <img
-              src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
-              className="card-img-top"
-              alt="movie poster"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{currentMovie.title}</h5>
-              <p className="card-text">{currentMovie.overview}</p>
-            </div>
-            <button
-              onClick={() => {
-                handleDelete(currentMovie);
-              }}
-              className="btn btn-danger mb-3"
-            >
-              Remover filme da lista
-            </button>
-          </div>
-        );
-      })}
-
-      <Search search={search} setSearch={setSearch} />
-      {movies
-        .filter((currentMovie) => {
-          return currentMovie.original_title
-            .toLowerCase()
-            .includes(search.toLowerCase());
-        })
-        .map((currentMovie) => {
+      <div className="d-flex flex-wrap">
+        {form.movies.map((currentMovie) => {
           return (
-            <div className="d-flex justify-content-center mb-3">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
-                  className="card-img-top"
-                  alt="movie poster"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{currentMovie.original_title}</h5>
-                  <p className="card-text">{currentMovie.overview}</p>
-                  <button
-                    type="submit"
-                    className="btn btn-info"
-                    onClick={() => {
-                      handleMovie(currentMovie);
-                    }}
-                  >
-                    Adicionar a sua lista
-                  </button>
-                </div>
+            <div
+              className="card m-1"
+              style={{ width: "18rem" }}
+              key={currentMovie.id}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
+                className="card-img-top"
+                alt="movie poster"
+              />
+              <div className="card-body">
+                <h5 className="card-title">{currentMovie.title}</h5>
+                <p className="card-text">
+                  <b>Nota: {currentMovie.vote_average}</b>
+                </p>
+                <p className="card-text">{currentMovie.overview}</p>
+                <button
+                  onClick={() => {
+                    handleDelete(currentMovie);
+                  }}
+                  className="btn btn-danger mb-3"
+                >
+                  Remover da lista
+                </button>
               </div>
             </div>
           );
         })}
+      </div>
+
+      <Search search={search} setSearch={setSearch} />
+
+      <div className="d-flex flex-wrap">
+        {movies
+          .filter((currentMovie) => {
+            return currentMovie.original_title
+              .toLowerCase()
+              .includes(search.toLowerCase());
+          })
+          .map((currentMovie) => {
+            return (
+              <div
+                className="d-flex justify-content-center m-1"
+                key={currentMovie.id}
+              >
+                <div className="card" style={{ width: "18rem" }}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
+                    className="card-img-top"
+                    alt="movie poster"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {currentMovie.original_title}
+                    </h5>
+                    <p className="card-text">
+                      <b>Nota: {currentMovie.vote_average}</b>
+                    </p>
+                    <p className="card-text">{currentMovie.overview}</p>
+                    <button
+                      type="submit"
+                      className="btn btn-info"
+                      onClick={() => {
+                        handleMovie(currentMovie);
+                      }}
+                    >
+                      Adicionar a sua lista
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </>
   );
 }

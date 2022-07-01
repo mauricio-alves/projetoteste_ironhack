@@ -15,4 +15,22 @@ html {
   background-color: rgb(88, 88, 138);
   margin-bottom: 20px;
   color: white;
+  border-radius: 5px;
+}
+
+.main {
+  min-height: 650px;
+}
+
+.footer {
+  width: 1200px;
+  height: 80px;
+  background-color: rgb(88, 88, 138);
+  color: white;
+  border-radius: 5px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
 }

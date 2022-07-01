@@ -36,34 +36,49 @@ export function UserList() {
   }
 
   return loading ? (
-    <h1>Carregando...</h1>
+    <div className="spinner-border text-info" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
   ) : (
     <div>
-      <h1>{movie.name}</h1>
-      <h2>{movie.title}</h2>
-      <button onClick={handleDelete} className="btn btn-danger mb-3">
-        Deletar lista
-      </button>
-      <Link to={`/edit-list/${id}`} className="btn btn-success mb-3 ms-2">
-        Editar lista
-      </Link>
-      {movie.movies.map((currentMovie) => {
-        return (
-          <div>
-            <div className="card" style={{ width: "18rem" }}>
-              <img
-                src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
-                className="card-img-top"
-                alt="movie poster"
-              />
-              <div className="card-body">
-                <h5 className="card-title">{currentMovie.title}</h5>
-                <p className="card-text">{currentMovie.overview}</p>
+      <div className="mb-3">
+        <h1 className="d-flex justify-content-center">
+          Lista de: {movie.name}
+        </h1>
+        <h2 className="d-flex justify-content-center">
+          Título da lista: {movie.title}
+        </h2>
+        <div className="d-flex justify-content-center mt-3">
+          <Link to={`/edit-list/${id}`} className="btn btn-success mb-3">
+            Editar lista
+          </Link>
+          <button onClick={handleDelete} className="btn btn-danger mb-3  ms-3">
+            Deletar lista
+          </button>
+        </div>
+      </div>
+      <div className="d-flex flex-wrap">
+        {movie.movies.map((currentMovie) => {
+          return (
+            <div key={currentMovie.id}>
+              <div className="card m-1" style={{ width: "18rem" }}>
+                <img
+                  src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
+                  className="card-img-top"
+                  alt="movie poster"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{currentMovie.title}</h5>
+                  <p className="card-text">
+                    <b>Nota: {currentMovie.vote_average}</b>
+                  </p>
+                  <p className="card-text">{currentMovie.overview}</p>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
