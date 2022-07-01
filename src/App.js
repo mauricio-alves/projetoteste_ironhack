@@ -5,9 +5,12 @@ import { CreateMoviesList } from "./Pages/CreateMoviesList";
 import { UserList } from "./Pages/UserList/index.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { EditMoviesList } from "./Pages/EditMoviesList/index.js";
+import { NotFound } from "./Pages/NotFound/index.js";
 
 export function App() {
   const [movies, setMovies] = useState([]);
+  const [moviesDB, setMoviesDB] = useState([]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -23,16 +26,38 @@ export function App() {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const response = await axios.get(
+          "https://ironrest.herokuapp.com/mauricio-filmes"
+        );
+        setMoviesDB(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchMovies();
+  }, [moviesDB]);
+
   return (
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home moviesDB={moviesDB} setMoviesDB={setMoviesDB} />}
+        />
         <Route
           path="/movies"
           element={<CreateMoviesList movies={movies} setMovies={setMovies} />}
         />
-        <Route path="/movies/user-list" element={<UserList />} />
+        <Route path="/user-list/:id" element={<UserList />} />
+        <Route
+          path="/edit-list/:id"
+          element={<EditMoviesList movies={movies} setMovies={setMovies} />}
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
